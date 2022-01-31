@@ -1,0 +1,29 @@
+{
+    "name": "codecollection",
+    "version": "1.0.0",
+    "description": "",
+    "main": "",
+    "scripts": {
+        "compile": "hardhat compile",
+        "test": "hardhat test",
+        "flat": "bash ./scripts/flatten.sh && python ./scripts/clean_licenses.py",
+        "deploy": "hardhat deploy --network mainnet",
+        "deploy-mumbai": "hardhat run ./scripts/deploy_all.js --network mumbai",
+        "deploy-sparta": "hardhat deploy --network sparta"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@openzeppelin/contracts": "^4.4.2",
+        "@openzeppelin/contracts-upgradeable": "^4.4.2",
+        "hardhat": "^2.8.3",
+        "hardhat-deploy": "^0.10.4",
+        "openzeppelin-solidity": "^3.0.0",
+        "@nomiclabs/hardhat-ethers": "^2.0.2",
+        "hardhat-deploy-ethers": "^0.3.0-beta.13",
+        "ethers": "^5.4.1",
+        "dotenv": "^15.0.0",
+        "@openzeppelin/contracts-ethereum-package": "^2.2.1-rc.0"
+    }
+}

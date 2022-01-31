@@ -1,0 +1,10 @@
+node_modules/
+cache/
+artifacts/
+publish/
+flatten/
+deployments/
+package-lock.json
+
+.env
+*.log
