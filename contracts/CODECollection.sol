@@ -73,7 +73,7 @@ contract CODECollection is ERC721URIStorage, ERC721Enumerable, Ownable {
         coders.push(coder);
     }
 
-    function deleteCoder(address coder) public returns (bool) {
+    function deleteCoder(address coder) public onlyOwner returns (bool) {
         for (uint256 i = 0; i < coders.length; i++) {
             if (coders[i] == coder) {
                 coders[i] = coders[coders.length - 1];
