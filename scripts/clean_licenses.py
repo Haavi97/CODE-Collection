@@ -11,7 +11,7 @@ for contract in flatten_contracts:
             with open(contract_name + '_cleaned.txt', 'w') as f2:
                 once = False
                 for line in f.readlines():
-                    if '// SPDX' in line:
+                    if '// SPDX' in line or '//SPDX' in line:
                         if not once:
                             once = True
                             f2.write(line)

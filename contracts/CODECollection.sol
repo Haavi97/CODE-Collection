@@ -24,6 +24,14 @@ contract CODECollection is ERC721URIStorage, ERC721Enumerable, Ownable {
         setBaseURI(_initBaseURI);
     }
 
+    /// @dev Events of the contract
+    event Minted(
+        uint256 tokenId,
+        address beneficiary,
+        string tokenUri,
+        address minter
+    );
+
     function _beforeTokenTransfer(
         address from,
         address to,
@@ -101,19 +109,20 @@ contract CODECollection is ERC721URIStorage, ERC721Enumerable, Ownable {
         return price;
     }
 
-    function mint(uint256 amount) public payable {
-        require(
-            totalSupply().add(amount) <= maxTokens,
-            "Mint over the max nft amount"
-        );
-        require(
-            calculatePrice().mul(amount) <= msg.value,
-            "Value sent less than needed"
-        );
+    function mint(address _to, string calldata _tokenUri) public payable {
+        require(calculatePrice() <= msg.value, "Value sent less than needed");
 
-        for (uint256 i = 0; i < amount; i++) {
-            uint256 index = totalSupply();
-            _safeMint(msg.sender, index);
-        }
+        uint256 index = totalSupply();
+        _safeMint(_to, index);
+        _setTokenURI(index, _tokenUri);
+        emit Minted(index, _to, _tokenUri, _msgSender());
+    }
+
+    function setTokenURI(uint256 _tokenId, string memory _tokenURI)
+        public
+        onlyOwner
+    {
+        require(bytes(super.tokenURI(_tokenId)).length == 0, "URI already set");
+        _setTokenURI(_tokenId, _tokenURI);
     }
 }
